@@ -57,3 +57,13 @@ typings/
 # dotenv environment variables file
 .env
 
+# IDE
+
+/.idea/
+/.vscode/
+
+# OS generated files #
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
