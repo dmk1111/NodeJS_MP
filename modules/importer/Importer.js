@@ -31,6 +31,9 @@ export class Importer extends EventEmitter {
 
     _parseCSV(path) {
         return new Promise((resolve, reject) => {
+            if (!this._isCSV(path)) {
+                return reject("File should have .csv extension");
+            }
             let arr = [];
             CSV()
                 .fromFile(path)
@@ -41,8 +44,13 @@ export class Importer extends EventEmitter {
                     if (error) {
                         return reject(error);
                     }
-                    resolve(arr);
+                    resolve(JSON.stringify(arr));
                 })
         })
+    }
+
+    _isCSV(path) {
+        let csvTest = new RegExp(".*\\.csv", "gi");
+        return csvTest.test(path);
     }
 }
