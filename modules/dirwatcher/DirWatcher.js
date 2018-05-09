@@ -13,7 +13,7 @@ export class DirWatcher extends EventEmitter {
         super();
     }
 
-    watch(path, delay) {
+    watch(path = null, delay = 1000) {
         this.interval = setInterval(() => {
             this.checkPath(path);
         }, delay)
@@ -23,7 +23,7 @@ export class DirWatcher extends EventEmitter {
         clearInterval(this.interval);
     }
 
-    checkPath(path) {
+    checkPath(path = null) {
         readDirAsync(path)
             .then((files) => {
                 this.dirFiles = [...files];
@@ -50,8 +50,7 @@ export class DirWatcher extends EventEmitter {
                         }
                     });
                 });
-
-            })
+            });
     }
 
     _emitChangedEvent() {

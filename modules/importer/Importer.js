@@ -1,15 +1,15 @@
 const CSV = require("csvtojson");
 import { EventEmitter } from "events";
+import { DirWatcher } from "..";
 
-// TODO: parse only CSV files, update _parseCSV logic, fix subtasks
 
 export class Importer extends EventEmitter {
-    constructor(emitter) {
+    constructor(path = null) {
         super();
-        this.emitter = emitter;
+        this.path = path;
     }
 
-    import(path) {
+    import(path = null) {
         return new Promise((resolve, reject) => {
             this._parseCSV(path)
                 .then(data => resolve(data))
@@ -24,9 +24,31 @@ export class Importer extends EventEmitter {
     }
 
     autoImport() {
-        if (this.emitter !== undefined) {
-            this.emitter.on("dirwatcher:changed", (data) => this.emit("importer:autoimport", data));
+        if (this.path !== undefined || this.path !== null) {
+            this.emitter = new DirWatcher();
+            this.emitter.watch(this.path);
+            this.emitter.on("dirwatcher:changed", (data) => {
+                let parsedData = [];
+                data.forEach(async (filePath, index) => {
+                    try {
+                        let json = await this.import(filePath);
+                        parsedData.push(...JSON.parse(json));
+                    } catch (error) {
+                        throw new Error(`Parsing CSV failed for file: ${filePath} \n ${error}`);
+                    }
+                    if (index === data.length - 1) {
+                        this.emit("importer:autoimport", JSON.stringify(parsedData));
+                    }
+                })
+            });
+        } else {
+            throw new Error(`autoImport is not available if you didn't specify path! \n 
+            Please, use 'changePath(path)' method to add path and try again`);
         }
+    }
+
+    changePath(path) {
+        this.path = path;
     }
 
     _parseCSV(path) {

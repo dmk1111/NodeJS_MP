@@ -21,3 +21,13 @@ dirEmitter.on("dirwatcher:changed", (files) => {
         });
     });
 });
+
+
+let autoImporter = new Importer("./data");
+
+autoImporter.autoImport();
+autoImporter.on("importer:autoimport", (data) => {
+    console.log("======= START OF AUTOIMPORT =====");
+    console.log(JSON.parse(data));
+    console.log("======= END OF AUTOIMPORT =====");
+});
