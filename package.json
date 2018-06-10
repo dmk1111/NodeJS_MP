@@ -17,6 +17,10 @@
     "nodemon": "^1.17.3"
   },
   "dependencies": {
-    "csvtojson": "^1.1.9"
+    "@types/minimist": "^1.2.0",
+    "@types/through2": "^2.0.33",
+    "csvtojson": "^1.1.9",
+    "minimist": "^1.2.0",
+    "through2": "^2.0.3"
   }
 }
