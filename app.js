@@ -1,33 +1,13 @@
-import config from "./config";
-import { User, Product } from "./models"
-import { DirWatcher, Importer } from "./modules";
+const express = require('express');
+const { cookieParser, queryParser } = require('./middlewares');
+const router = require('./routes/router');
 
-console.log(config.name);
+const app = express();
 
-let firstUser = new User();
-let firstProduct = new Product();
+app.use(cookieParser);
+app.use(queryParser);
 
-let dirEmitter = new DirWatcher();
+app.use('/api', router);
+app.use('/', router);
 
-dirEmitter.watch("./data", 5000);
-
-dirEmitter.on("dirwatcher:changed", (files) => {
-    files.forEach((path) => {
-        let importer = new Importer();
-        importer.import(path).then( result => {
-            console.log("======= START OF FILE =====");
-            console.log(JSON.parse(result));
-            console.log("======= END OF FILE =======");
-        });
-    });
-});
-
-
-let autoImporter = new Importer("./data");
-
-autoImporter.autoImport();
-autoImporter.on("importer:autoimport", (data) => {
-    console.log("======= START OF AUTOIMPORT =====");
-    console.log(JSON.parse(data));
-    console.log("======= END OF AUTOIMPORT =====");
-});
+module.exports = app;
