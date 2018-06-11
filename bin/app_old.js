@@ -1,6 +1,6 @@
-import config from "./config/index";
-import { User, Product } from "./models/index"
-import { DirWatcher, Importer } from "./modules/index";
+import config from "./config";
+import { User, Product } from "../models"
+import { DirWatcher, Importer } from "./modules";
 
 console.log(config.name);
 

@@ -1,17 +1,81 @@
-/*
-TODO: create routes for:
-    /api/products	GET	Return ALL products
-    /api/products/:id	GET	Return SINGLE product
-    /api/products/:id/reviews	GET	Return ALL reviews for a single product
-    /api/products	POST	Add NEW product and return it
-    /api/users	GET	Return ALL users
-*/
-
 const express = require('express');
 const router = express.Router();
+const rootRouter = express.Router();
+const users = require('../bin/data/Users');
+const products = require('../bin/data/Products');
+// const { User, Product } = require('../models');
 
-router.get('/', (req, res) => {
-res.json({'ok': true});
+rootRouter.get('/', (req, res) => {
+    res.send('Public api is available at "/api" route');
+    res.end();
 });
 
-module.exports = router;
+router.get('/', (req, res) => {
+    res.json([
+        {
+            method: 'GET',
+            route: '/products',
+            description: 'return ALL products'
+        },
+        {
+            method: 'GET',
+            route: '/products/:id',
+            description: 'return SINGLE product'
+        },
+        {
+            method: 'GET',
+            route: '/products/:id/reviews',
+            description: 'return ALL reviews for a single product'
+        },
+        {
+            method: 'POST',
+            route: '/products',
+            description: 'add NEW product and return it'
+        },
+        {
+            method: 'GET',
+            route: '/users',
+            description: 'return ALL users'
+        }
+    ]);
+});
+
+router.get('/users', (req, res) => {
+    // let parsedUsers = users.map(item => new User(item));
+    // res.json(parsedUsers);
+    res.json(users);
+});
+
+router.get('/products', (req, res) => {
+    // let mappedProducts = products.map(item => new Product(item));
+    // res.json(mappedProducts);
+    res.json(products);
+});
+
+router.get('/products/:id', (req, res) => {
+    let singleProduct = getSingleProduct(req.params.id);
+    res.json(singleProduct);
+});
+
+router.param('id', function (req, res, next, id) {
+    req.product = getSingleProduct(id);
+    next();
+});
+
+router.get('/products/:id/reviews', (req, res) => {
+    res.json(req.product.reviews);
+});
+
+router.post('/products', (req, res) => {
+    products.push(req.body.product);
+    res.statusCode(200);
+});
+
+module.exports = {
+    router: router,
+    rootRouter: rootRouter
+};
+
+function getSingleProduct(id) {
+    return products.filter(item => item._id === id)[0];
+}

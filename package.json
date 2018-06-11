@@ -6,6 +6,7 @@
   "scripts": {
     "start-old": "nodemon --exec babel-node -- ./bin/app_old.js",
     "start": "nodemon index.js",
+    "debug": "nodemon $NODE_DEBUG_OPTION index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dmytro Holysh <Dmytro_Holysh@epam.com>",
