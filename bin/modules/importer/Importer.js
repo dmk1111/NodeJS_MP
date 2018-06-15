@@ -1,6 +1,6 @@
 const CSV = require("csvtojson");
 import { EventEmitter } from "events";
-import { DirWatcher } from "..";
+import { DirWatcher } from "../index";
 
 
 export class Importer extends EventEmitter {

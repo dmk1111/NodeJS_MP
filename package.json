@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node -- ./app.js",
+    "start-old": "nodemon --exec babel-node -- ./bin/app_old.js",
+    "start": "nodemon index.js",
+    "debug": "nodemon $NODE_DEBUG_OPTION index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dmytro Holysh <Dmytro_Holysh@epam.com>",
@@ -14,12 +16,14 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.26.0",
-    "nodemon": "^1.17.3"
+    "nodemon": "^1.17.5"
   },
   "dependencies": {
     "@types/minimist": "^1.2.0",
     "@types/through2": "^2.0.33",
+    "cookies": "^0.7.1",
     "csvtojson": "^1.1.9",
+    "express": "^4.16.3",
     "minimist": "^1.2.0",
     "through2": "^2.0.3"
   }
