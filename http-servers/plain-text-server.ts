@@ -8,4 +8,5 @@ http
         });
         res.end('Hello World');
     })
+    .on('error', (err) => console.log(err))
     .listen(3000);

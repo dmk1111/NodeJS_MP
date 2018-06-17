@@ -27,4 +27,6 @@ http
         rstream.on('end', _ => {
             res.end();
         });
-    }).listen(3000);
+    })
+    .on('error', (err) => console.log(err))
+    .listen(3000);

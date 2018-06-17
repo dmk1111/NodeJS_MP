@@ -11,6 +11,6 @@ app.use(express.json());
 app.use('/api', router);
 app.use('/', rootRouter);
 
-module.exports = app;
+// module.exports = app;
 
 export default app;
