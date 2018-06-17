@@ -7,9 +7,9 @@
     "start-old": "ts-node ./bin/app_old.ts",
     "start": "ts-node-dev index.ts",
     "debug": "ts-node-dev $NODE_DEBUG_OPTION index.ts",
-    "build": "npm run clear && tsc && npm run html",
+    "build": "npm run clear && tsc && npm run copy:html",
     "clear": "rimraf dist",
-    "html": "copyfiles ./**/*.html ./**/*.css dist/",
+    "copy:html": "copyfiles ./**/*.html ./**/*.css dist/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dmytro Holysh <Dmytro_Holysh@epam.com>",
