@@ -3,8 +3,8 @@ import { ProductsController, UsersController } from "../controllers";
 
 const express = require('express');
 const routerApi = express.Router();
-const users = new UsersController().getUsers();
-const products = new ProductsController().getProducts();
+const users: IUser[] = new UsersController().getUsers();
+const products: IProduct[] = new ProductsController().getProducts();
 
 routerApi.get('/', (req, res) => {
     res.json([
