@@ -1,4 +1,4 @@
-export default function cookieParser(req: any, res: any, next: any) {
+export function cookieParser(req: any, res: any, next: any) {
     let cookies = req.header('Set-Cookie');
     let parsedCookies: any = {};
 
@@ -11,5 +11,3 @@ export default function cookieParser(req: any, res: any, next: any) {
     next();
 
 }
-
-// module.exports = cookieParser;

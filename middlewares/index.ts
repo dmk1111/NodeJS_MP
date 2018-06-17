@@ -1,13 +1,6 @@
-// const cookieParser = require('./cookieParser');
-// const queryParser = require('./queryParser');
-//
-// module.exports = {
-//     cookieParser: cookieParser,
-//     queryParser: queryParser
-// };
+import { cookieParser } from './cookieParser';
+import { queryParser } from './queryParser';
+import { tokenVerifier } from './tokenVerifier';
 
-import cookieParser from './cookieParser';
-import queryParser from './queryParser';
-
-export { cookieParser, queryParser };
+export { cookieParser, queryParser, tokenVerifier };
 

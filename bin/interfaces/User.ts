@@ -11,6 +11,8 @@ export interface IUser {
         "first": string,
         "last": string
     },
+    "username": string,
+    "encryptedPass"?: string,
     "company": string,
     "email": string,
     "phone": string,
