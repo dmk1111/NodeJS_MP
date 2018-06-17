@@ -1,8 +1,11 @@
+import { IProduct } from "../bin/interfaces/Product";
+import { IUser } from "../bin/interfaces/User";
+
 const express = require('express');
 const router = express.Router();
 const rootRouter = express.Router();
-const users = require('../bin/data/Users');
-const products = require('../bin/data/Products');
+const users: IUser[] = require('../bin/data/Users');
+const products: IProduct[] = require('../bin/data/Products');
 // const { User, Product } = require('../models');
 
 rootRouter.get('/', (req, res) => {
@@ -58,6 +61,7 @@ router.get('/products/:id', (req, res) => {
 });
 
 router.param('id', function (req, res, next, id) {
+    // noinspection JSAnnotator
     req.product = getSingleProduct(id);
     next();
 });
@@ -76,6 +80,8 @@ module.exports = {
     rootRouter: rootRouter
 };
 
-function getSingleProduct(id) {
+function getSingleProduct(id: string): IProduct {
     return products.filter(item => item._id === id)[0];
 }
+
+export { router, rootRouter };

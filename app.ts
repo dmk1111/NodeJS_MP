@@ -1,6 +1,6 @@
 const express = require('express');
-const { cookieParser, queryParser } = require('./middlewares');
-const { router, rootRouter } = require('./routes/router');
+import { cookieParser, queryParser } from './middlewares';
+import { router, rootRouter } from './routes/router';
 
 const app = express();
 
@@ -12,3 +12,5 @@ app.use('/api', router);
 app.use('/', rootRouter);
 
 module.exports = app;
+
+export default app;

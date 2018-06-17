@@ -1,5 +1,5 @@
-const http = require('http');
-const fs = require('fs');
+import http from 'http';
+import fs from 'fs';
 // const { StringDecoder } = require('string_decoder');
 
 // const decoder = new StringDecoder('utf8');
