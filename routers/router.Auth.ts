@@ -1,4 +1,4 @@
-import { IUser } from "../bin/interfaces/User";
+import { IUser } from "../bin/interfaces";
 import { sign } from 'jsonwebtoken';
 import { compare } from 'bcrypt';
 import { UsersController } from "../controllers";
@@ -38,7 +38,7 @@ routerAuth.post('/', (req, res) => {
         };
         res.send(fail);
     }
-    res.end();
+    // res.end();
 });
 
 export default routerAuth;

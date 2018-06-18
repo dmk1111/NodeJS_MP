@@ -1,10 +1,13 @@
 import { IProduct, IUser } from "../bin/interfaces";
 import { ProductsController, UsersController } from "../controllers";
+import { tokenVerifier } from "../middlewares";
 
 const express = require('express');
 const routerApi = express.Router();
 const users: IUser[] = new UsersController().getUsers();
 const products: IProduct[] = new ProductsController().getProducts();
+
+routerApi.use(tokenVerifier);
 
 routerApi.get('/', (req, res) => {
     res.json([
