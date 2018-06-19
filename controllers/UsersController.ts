@@ -15,6 +15,10 @@ export class UsersController {
         return this.users;
     }
 
+    public getUser(username): IUser | undefined {
+        return this.users.find(user => user.username === username);
+    }
+
     private addEncryptedPass(): void {
         hash("1234", this.salt)
             .then(res => {
