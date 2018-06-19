@@ -21,13 +21,7 @@ export interface IUser {
     "registered": string,
     "latitude": string,
     "longitude": string,
-    "tags": [
-        "ex",
-        "ad",
-        "aute",
-        "ullamco",
-        "nulla"
-        ],
+    "tags": string[],
     "range": number[],
     "friends": IFriend[],
     "greeting": string,
