@@ -1,5 +1,5 @@
 export interface IProduct {
-    "_id": string,
+    "id": string,
     "index": number,
     "isAvailable": boolean,
     "productName": string,
@@ -15,7 +15,7 @@ export interface IProduct {
 }
 
 export interface IReview {
-    "_id": string,
+    "id": string,
     "review": string,
     "rating": number
 }

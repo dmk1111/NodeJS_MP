@@ -1,16 +1,14 @@
 export interface IUser {
-    "_id": string,
+    "id": string,
     "index": number,
     "guid": string,
-    "isActive": false,
+    "isActive": boolean,
     "balance": string,
     "picture": string,
     "age": number,
     "eyeColor": string,
-    "name": {
-        "first": string,
-        "last": string
-    },
+    "firstName": string,
+    "lastName": string,
     "username": string,
     "encryptedPass"?: string,
     "company": string,
