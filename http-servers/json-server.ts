@@ -1,4 +1,4 @@
-const http = require('http');
+import http from 'http';
 
 const product = {
     id: 1,
@@ -21,4 +21,6 @@ http
 
         res.write(JSON.stringify(product));
         res.end();
-    }).listen(3000);
+    })
+    .on('error', (err) => console.log(err))
+    .listen(3000);

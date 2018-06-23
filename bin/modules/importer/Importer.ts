@@ -1,15 +1,20 @@
 const CSV = require("csvtojson");
 import { EventEmitter } from "events";
-import { DirWatcher } from "../index";
+import { DirWatcher } from "../";
 
 
 export class Importer extends EventEmitter {
-    constructor(path = null) {
+
+    private path: string;
+    private emitter: DirWatcher;
+
+    constructor(path: string | any = null) {
         super();
         this.path = path;
+        this.emitter = new DirWatcher();
     }
 
-    import(path = null) {
+    import(path: string | any = null): Promise<string> {
         return new Promise((resolve, reject) => {
             this._parseCSV(path)
                 .then(data => resolve(data))
@@ -17,7 +22,7 @@ export class Importer extends EventEmitter {
         });
     }
 
-    importSync(path, callback) {
+    importSync(path: string, callback: Function) {
         this._parseCSV(path)
             .then(data => callback(null, data))
             .catch(error => callback(error));
@@ -25,16 +30,15 @@ export class Importer extends EventEmitter {
 
     autoImport() {
         if (this.path !== undefined || this.path !== null) {
-            this.emitter = new DirWatcher();
             this.emitter.watch(this.path);
             this.emitter.on("dirwatcher:changed", (data) => {
-                let parsedData = [];
-                data.forEach(async (filePath, index) => {
+                let parsedData: any[] = [];
+                data.forEach(async (filePath: string, index: number) => {
                     try {
                         let json = await this.import(filePath);
                         parsedData.push(...JSON.parse(json));
                     } catch (error) {
-                        throw new Error(`Parsing CSV failed for file: ${filePath} \n ${error}`);
+                        console.warn(`Parsing CSV failed for file: ${filePath} \n ${error}`);
                     }
                     if (index === data.length - 1) {
                         this.emit("importer:autoimport", JSON.stringify(parsedData));
@@ -47,22 +51,22 @@ export class Importer extends EventEmitter {
         }
     }
 
-    changePath(path) {
+    changePath(path: string) {
         this.path = path;
     }
 
-    _parseCSV(path) {
+    _parseCSV(path: string): Promise<string> {
         return new Promise((resolve, reject) => {
             if (!this._isCSV(path)) {
                 return reject("File should have .csv extension");
             }
-            let arr = [];
+            let arr: any[] = [];
             CSV()
                 .fromFile(path)
-                .on('json', (jsonObj) => {
+                .on('json', (jsonObj: any) => {
                     arr.push(jsonObj);
                 })
-                .on('done', (error) => {
+                .on('done', (error: any) => {
                     if (error) {
                         return reject(error);
                     }
@@ -71,7 +75,7 @@ export class Importer extends EventEmitter {
         })
     }
 
-    _isCSV(path) {
+    _isCSV(path: string) {
         let csvTest = new RegExp(".*\\.csv", "gi");
         return csvTest.test(path);
     }

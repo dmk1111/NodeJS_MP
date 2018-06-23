@@ -1,16 +1,15 @@
+import { IProduct, IUser } from "../bin/interfaces";
+import { ProductsController, UsersController } from "../controllers";
+import { tokenVerifier } from "../middlewares";
+
 const express = require('express');
-const router = express.Router();
-const rootRouter = express.Router();
-const users = require('../bin/data/Users');
-const products = require('../bin/data/Products');
-// const { User, Product } = require('../models');
+const routerApi = express.Router();
+const users: IUser[] = new UsersController().getUsers();
+const products: IProduct[] = new ProductsController().getProducts();
 
-rootRouter.get('/', (req, res) => {
-    res.send('Public api is available at "/api" route');
-    res.end();
-});
+routerApi.use(tokenVerifier);
 
-router.get('/', (req, res) => {
+routerApi.get('/', (req, res) => {
     res.json([
         {
             method: 'GET',
@@ -40,42 +39,40 @@ router.get('/', (req, res) => {
     ]);
 });
 
-router.get('/users', (req, res) => {
+routerApi.get('/users', (req, res) => {
     // let parsedUsers = users.map(item => new User(item));
     // res.json(parsedUsers);
     res.json(users);
 });
 
-router.get('/products', (req, res) => {
+routerApi.get('/products', (req, res) => {
     // let mappedProducts = products.map(item => new Product(item));
     // res.json(mappedProducts);
     res.json(products);
 });
 
-router.get('/products/:id', (req, res) => {
+routerApi.get('/products/:id', (req, res) => {
     let singleProduct = getSingleProduct(req.params.id);
     res.json(singleProduct);
 });
 
-router.param('id', function (req, res, next, id) {
+routerApi.param('id', function (req, res, next, id) {
+    // noinspection JSAnnotator
     req.product = getSingleProduct(id);
     next();
 });
 
-router.get('/products/:id/reviews', (req, res) => {
+routerApi.get('/products/:id/reviews', (req, res) => {
     res.json(req.product.reviews);
 });
 
-router.post('/products', (req, res) => {
+routerApi.post('/products', (req, res) => {
     products.push(req.body.product);
     res.statusCode(200);
 });
 
-module.exports = {
-    router: router,
-    rootRouter: rootRouter
-};
-
-function getSingleProduct(id) {
+function getSingleProduct(id: string): IProduct {
     return products.filter(item => item._id === id)[0];
 }
+
+export default routerApi;

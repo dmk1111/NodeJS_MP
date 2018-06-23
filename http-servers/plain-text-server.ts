@@ -1,4 +1,4 @@
-const http = require('http');
+import http from 'http';
 
 http
     .createServer()
@@ -8,4 +8,5 @@ http
         });
         res.end('Hello World');
     })
+    .on('error', (err) => console.log(err))
     .listen(3000);

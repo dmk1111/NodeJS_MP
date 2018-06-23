@@ -1,5 +1,5 @@
-const http = require('http');
-const fs = require('fs');
+import http from 'http';
+import fs from 'fs';
 // const { StringDecoder } = require('string_decoder');
 
 // const decoder = new StringDecoder('utf8');
@@ -27,4 +27,6 @@ http
         rstream.on('end', _ => {
             res.end();
         });
-    }).listen(3000);
+    })
+    .on('error', (err) => console.log(err))
+    .listen(3000);

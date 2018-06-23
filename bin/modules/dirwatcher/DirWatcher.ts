@@ -1,19 +1,25 @@
 import { EventEmitter } from "events";
-import { readdir, stat } from "fs";
+import { PathLike, readdir, stat } from "fs";
+import { promisify } from "util";
 import  * as Path  from "path";
+const readDirAsync = promisify(readdir);
+const statAsync = promisify(stat);
 
 export class DirWatcher extends EventEmitter {
 
     isFirstChange = true;
     folderChanged = false;
-    dirFiles = [];
-    oldFilesChangeTime = [];
+    dirFiles: any[] = [];
+    oldFilesChangeTime: Array<FileChangeTime> = [];
+
+    private interval: any;
+    private changedFiles: any[] = [];
 
     constructor() {
         super();
     }
 
-    watch(path = null, delay = 1000) {
+    watch(path: PathLike, delay = 1000) {
         this.interval = setInterval(() => {
             this.checkPath(path);
         }, delay)
@@ -23,13 +29,13 @@ export class DirWatcher extends EventEmitter {
         clearInterval(this.interval);
     }
 
-    checkPath(path = null) {
+    checkPath(path: PathLike) {
         readDirAsync(path)
             .then((files) => {
                 this.dirFiles = [...files];
                 this.changedFiles = [];
                 this.dirFiles.forEach((filePath, findex) => {
-                    let absolutePath = Path.resolve(path, filePath);
+                    let absolutePath = Path.resolve(<string>path, filePath);
                     statAsync(absolutePath).then( stats => {
                         let itemPresent = this.oldFilesChangeTime.some(item => item.path === absolutePath);
                         let index = -1;
@@ -64,24 +70,29 @@ export class DirWatcher extends EventEmitter {
     }
 }
 
-function readDirAsync(path) {
-    return new Promise(function (resolve, reject) {
-        readdir(path, function (err, data) {
-            if (err !== null) {
-                return reject(err);
-            }
-            resolve(data);
-        });
-    });
-}
+// function readDirAsync(path): Promise<any> {
+//     return new Promise( (resolve, reject) => {
+//         readdir(path, function (err, data) {
+//             if (err !== null) {
+//                 return reject(err);
+//             }
+//             resolve(data);
+//         });
+//     });
+// }
+//
+// function statAsync(path) {
+//     return new Promise(function (resolve, reject) {
+//         stat(path, function (err, data) {
+//             if (err !== null) {
+//                 return reject(err);
+//             }
+//             resolve(data);
+//         });
+//     });
+// }
 
-function statAsync(path) {
-    return new Promise(function (resolve, reject) {
-        stat(path, function (err, data) {
-            if (err !== null) {
-                return reject(err);
-            }
-            resolve(data);
-        });
-    });
+interface FileChangeTime {
+    path: string,
+    timeMs: number
 }
