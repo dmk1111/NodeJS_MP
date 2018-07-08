@@ -1,7 +1,8 @@
 import SequelizeConstructor from 'sequelize';
-import { Sequelize, DataTypes } from 'sequelize';
+import { Sequelize } from 'sequelize';
 import { Importer } from '../bin/modules';
 import * as Path from 'path';
+import { IProduct } from "../bin/interfaces";
 
 export class PostgresController {
 
@@ -19,7 +20,7 @@ export class PostgresController {
         const importer = new Importer();
         importer.import(path).then((result: string) => {
             let data = JSON.parse(result);
-            this.sequelize.sync({force: true})
+            this.sequelize.sync({ force: true })
                 .then(() => {
                     for (let key in data) {
                         const newProduct = {
@@ -49,6 +50,14 @@ export class PostgresController {
                 .then(() => console.log(`Products were imported from path '${this.path}'`));
         })
 
+    }
+
+    public async getProducts(): Promise<IProduct[]> {
+        return await this.product.findAll();
+    }
+
+    public async getProduct(id: string): Promise<IProduct> {
+        return await this.product.findOne({where: {id: +id}});
     }
 
     private testConnection() {
