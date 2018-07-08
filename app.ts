@@ -7,7 +7,7 @@ import {  PostgresController } from "./controllers";
 const app = express();
 
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/database')[env];
+const config = require('./config/database')[env];
 
 const postgresCtrl = new PostgresController(config);
 

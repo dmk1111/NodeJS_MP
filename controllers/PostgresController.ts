@@ -1,49 +1,52 @@
 import SequelizeConstructor from 'sequelize';
-import { Sequelize } from 'sequelize';
+import { Sequelize, DataTypes } from 'sequelize';
 import { Importer } from '../bin/modules';
-import Product from '../models/product.js'
+import * as Path from 'path';
 
 export class PostgresController {
 
     private sequelize: Sequelize;
-    private path: string = '../bin/data/Products.csv';
-    private product = Product();
+    private path: string = Path.resolve('./bin/data/Products.csv');
+    private product;
 
     constructor(private connectionOptions) {
         this.sequelize = new SequelizeConstructor(connectionOptions);
+        this.product = this.sequelize.import('../models/product.js');
         this.testConnection();
     }
 
     public importProductData(path) {
-        let importer = new Importer();
+        const importer = new Importer();
         importer.import(path).then((result: string) => {
             let data = JSON.parse(result);
-            this.sequelize.sync()
+            this.sequelize.sync({force: true})
                 .then(() => {
-                    for( let key in data ) {
+                    for (let key in data) {
+                        const newProduct = {
+                            index: +data[key].index,
+                            isAvailable: !!data[key].isAvailable,
+                            productName: data[key].productName,
+                            price: data[key].price,
+                            picture: data[key].picture,
+                            color: data[key].color,
+                            company: data[key].company,
+                            address: data[key].address,
+                            about: data[key].about,
+                            produced: new Date(data[key].produced),
+                            amount: +data[key].amount
+                        };
                         this.product
-                            .findOrCreate({where: {id: data[key].id}, defaults: {
-                                    index: data[key].index,
-                                    isAvailable: data[key].isAvailable,
-                                    productName: data[key].productName,
-                                    price: data[key].price,
-                                    picture: data[key].picture,
-                                    color: data[key].color,
-                                    company: data[key].company,
-                                    address: data[key].address,
-                                    about: data[key].about,
-                                    produced: data[key].produced,
-                                    amount: data[key].amount
-                                }})
-                            .spread(function(product, created) {
+                            .create(newProduct)
+                            .then(function (product) {
                                 console.log(product.get({
                                     plain: true
                                 }));
-                                console.log(created)
+                            }, function (error) {
+                                console.log('ERROR!!!! ', error);
                             })
                     }
                 })
-                .then( () => console.log(`Products were imported from path '${this.path}'`));
+                .then(() => console.log(`Products were imported from path '${this.path}'`));
         })
 
     }

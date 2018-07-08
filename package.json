@@ -16,8 +16,8 @@
     "db:seed": "./node_modules/.bin/sequelize db:seed:all",
     "migration:prepare": "rimraf models/user.js && rimraf models/product.js && rimraf migrations/*.js",
     "createModel": "npm run migration:prepare && npm run createModel:User && npm run createModel:Product",
-    "createModel:User": "./node_modules/.bin/sequelize model:create --name User --attributes 'email:string index:integer guid:uuid isActive:boolean balance:string picture:string age:integer eyeColor:string firstName:string lastName:string username:string encryptedPass:string company:string phone:string address:string about:text registered:date greeting:string favoriteFruit:string'",
-    "createModel:Product": "./node_modules/.bin/sequelize model:create --name Product --attributes 'index:integer isAvailable:boolean productName:string price:string picture:string color:string company:string address:string about:text produced:date amount:integer'"
+    "createModel:User": "./node_modules/.bin/sequelize model:create --name User --attributes 'email:string index:string guid:uuid isActive:boolean balance:string picture:string age:integer eyeColor:string firstName:string lastName:string username:string encryptedPass:string company:string phone:string address:string about:text registered:date greeting:string favoriteFruit:string'",
+    "createModel:Product": "./node_modules/.bin/sequelize model:create --name Product --attributes 'index:string isAvailable:boolean productName:string price:string picture:string color:string company:string address:string about:text produced:date amount:integer'"
   },
   "author": "Dmytro Holysh <Dmytro_Holysh@epam.com>",
   "license": "ISC",
