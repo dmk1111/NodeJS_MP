@@ -1,6 +1,6 @@
 [
   {
-    "_id": "5b1e1c780b646808b2d0a2a5",
+    "id": "5b1e1c780b646808b2d0a2a5",
     "index": 0,
     "guid": "e439c31e-edfa-4489-82ba-880c67248374",
     "isActive": false,
@@ -8,10 +8,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 26,
     "eyeColor": "green",
-    "name": {
-      "first": "Katherine",
-      "last": "Anderson"
-    },
+    "firstName": "Katherine",
+    "lastName": "Anderson",
     "username": "kanderson",
     "company": "ENORMO",
     "email": "katherine.anderson@enormo.net",
@@ -58,7 +56,7 @@
     "favoriteFruit": "strawberry"
   },
   {
-    "_id": "5b1e1c786e40981c5e5c572b",
+    "id": "5b1e1c786e40981c5e5c572b",
     "index": 1,
     "guid": "b43c1d8a-2447-4d7e-bc5e-16ae4fb3bbce",
     "isActive": true,
@@ -66,10 +64,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 36,
     "eyeColor": "blue",
-    "name": {
-      "first": "Gomez",
-      "last": "Christian"
-    },
+    "firstName": "Gomez",
+    "lastName": "Christian",
     "username": "gchristian",
     "company": "MAINELAND",
     "email": "gomez.christian@maineland.info",
@@ -116,7 +112,7 @@
     "favoriteFruit": "banana"
   },
   {
-    "_id": "5b1e1c78e2fe8e7817022621",
+    "id": "5b1e1c78e2fe8e7817022621",
     "index": 2,
     "guid": "5122abf8-ef9d-4387-b37b-464e7bd5c963",
     "isActive": false,
@@ -124,10 +120,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 31,
     "eyeColor": "green",
-    "name": {
-      "first": "Church",
-      "last": "Head"
-    },
+    "firstName": "Church",
+    "lastName": "Head",
     "username": "chead",
     "company": "COREPAN",
     "email": "church.head@corepan.tv",
@@ -174,7 +168,7 @@
     "favoriteFruit": "apple"
   },
   {
-    "_id": "5b1e1c78733f1837cbd184aa",
+    "id": "5b1e1c78733f1837cbd184aa",
     "index": 3,
     "guid": "4a8d155d-fa63-4e52-9e27-e28951bc58f0",
     "isActive": true,
@@ -182,10 +176,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 27,
     "eyeColor": "brown",
-    "name": {
-      "first": "Stafford",
-      "last": "Patel"
-    },
+    "firstName": "Stafford",
+    "lastName": "Patel",
     "username": "spatel",
     "company": "BOLAX",
     "email": "stafford.patel@bolax.org",
@@ -232,7 +224,7 @@
     "favoriteFruit": "apple"
   },
   {
-    "_id": "5b1e1c786bb7d0a75059860e",
+    "id": "5b1e1c786bb7d0a75059860e",
     "index": 4,
     "guid": "d7f5e5fd-f2d1-4428-894d-e5335029fd06",
     "isActive": false,
@@ -240,10 +232,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 32,
     "eyeColor": "brown",
-    "name": {
-      "first": "Mosley",
-      "last": "Washington"
-    },
+    "firstName": "Mosley",
+    "lastName": "Washington",
     "username": "nwashington",
     "company": "SKYPLEX",
     "email": "mosley.washington@skyplex.ca",
@@ -290,7 +280,7 @@
     "favoriteFruit": "banana"
   },
   {
-    "_id": "5b1e1c783e89f008a9460e6e",
+    "id": "5b1e1c783e89f008a9460e6e",
     "index": 5,
     "guid": "576bc832-c6d4-4294-9f28-9652b20f81ca",
     "isActive": true,
@@ -298,10 +288,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 27,
     "eyeColor": "brown",
-    "name": {
-      "first": "Krista",
-      "last": "Durham"
-    },
+    "firstName": "Krista",
+    "lastName": "Durham",
     "username": "kdurham",
     "company": "INEAR",
     "email": "krista.durham@inear.co.uk",
@@ -348,7 +336,7 @@
     "favoriteFruit": "strawberry"
   },
   {
-    "_id": "5b1e1c78adda3fde544e90a5",
+    "id": "5b1e1c78adda3fde544e90a5",
     "index": 6,
     "guid": "bfb8ef06-2c27-45d2-91b3-e4e4b6aa790e",
     "isActive": false,
@@ -356,10 +344,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 27,
     "eyeColor": "brown",
-    "name": {
-      "first": "Alyssa",
-      "last": "Terry"
-    },
+    "firstName": "Alyssa",
+    "lastName": "Terry",
     "username": "aterry",
     "company": "ZOGAK",
     "email": "alyssa.terry@zogak.us",
@@ -406,7 +392,7 @@
     "favoriteFruit": "apple"
   },
   {
-    "_id": "5b1e1c783d63f6984f8a54fa",
+    "id": "5b1e1c783d63f6984f8a54fa",
     "index": 7,
     "guid": "c650eef4-6742-471f-a399-03fda13d4c07",
     "isActive": true,
@@ -414,10 +400,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 20,
     "eyeColor": "green",
-    "name": {
-      "first": "Colleen",
-      "last": "Guthrie"
-    },
+    "firstName": "Colleen",
+    "lastName": "Guthrie",
     "username": "cguthrie",
     "company": "ONTALITY",
     "email": "colleen.guthrie@ontality.name",
@@ -464,7 +448,7 @@
     "favoriteFruit": "strawberry"
   },
   {
-    "_id": "5b1e1c780a4fbdd461a724f1",
+    "id": "5b1e1c780a4fbdd461a724f1",
     "index": 8,
     "guid": "7a281abe-4eba-488f-9cfa-5ef8f1044814",
     "isActive": true,
@@ -472,10 +456,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 26,
     "eyeColor": "brown",
-    "name": {
-      "first": "Woods",
-      "last": "Morton"
-    },
+    "firstName": "Woods",
+    "lastName": "Morton",
     "username": "wmorton",
     "company": "INQUALA",
     "email": "woods.morton@inquala.io",
@@ -522,7 +504,7 @@
     "favoriteFruit": "apple"
   },
   {
-    "_id": "5b1e1c788d45ab19ef7c566b",
+    "id": "5b1e1c788d45ab19ef7c566b",
     "index": 9,
     "guid": "8f9a451f-b403-4130-a434-6461ae385045",
     "isActive": false,
@@ -530,10 +512,8 @@
     "picture": "http://placehold.it/32x32",
     "age": 25,
     "eyeColor": "green",
-    "name": {
-      "first": "Ford",
-      "last": "Wilder"
-    },
+    "firstName": "Ford",
+    "lastName": "Wilder",
     "username": "fwilder",
     "company": "TROLLERY",
     "email": "ford.wilder@trollery.biz",

@@ -1,11 +1,17 @@
 import { IProduct, IUser } from "../bin/interfaces";
-import { ProductsController, UsersController } from "../controllers";
+import { PostgresController, ProductsController, UsersController } from "../controllers";
 import { tokenVerifier } from "../middlewares";
+
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config/database')[env];
+
+const postgresCtrl = new PostgresController(config);
 
 const express = require('express');
 const routerApi = express.Router();
 const users: IUser[] = new UsersController().getUsers();
-const products: IProduct[] = new ProductsController().getProducts();
+const productCtrl = new ProductsController();
+const products: IProduct[] = productCtrl.getProducts();
 
 routerApi.use(tokenVerifier);
 
@@ -45,20 +51,22 @@ routerApi.get('/users', (req, res) => {
     res.json(users);
 });
 
-routerApi.get('/products', (req, res) => {
+routerApi.get('/products', async (req, res) => {
     // let mappedProducts = products.map(item => new Product(item));
     // res.json(mappedProducts);
-    res.json(products);
+    // res.json(products);
+    const data = await postgresCtrl.getProducts();
+    res.json(data);
 });
 
-routerApi.get('/products/:id', (req, res) => {
-    let singleProduct = getSingleProduct(req.params.id);
+routerApi.get('/products/:id', async (req, res) => {
+    let singleProduct = await getSingleProduct(req.params.id);
     res.json(singleProduct);
 });
 
-routerApi.param('id', function (req, res, next, id) {
+routerApi.param('id', async function (req, res, next, id) {
     // noinspection JSAnnotator
-    req.product = getSingleProduct(id);
+    req.product = await getSingleProduct(id);
     next();
 });
 
@@ -71,8 +79,9 @@ routerApi.post('/products', (req, res) => {
     res.statusCode(200);
 });
 
-function getSingleProduct(id: string): IProduct {
-    return products.filter(item => item._id === id)[0];
+async function getSingleProduct(id: string): Promise<IProduct> {
+    // return products.filter(item => item.id === id)[0];
+    return await postgresCtrl.getProduct(id);
 }
 
 export default routerApi;
