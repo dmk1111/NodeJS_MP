@@ -1,7 +1,9 @@
 import { IProduct, IUser } from "../bin/interfaces";
 import { PostgresController, ProductsController, UsersController } from "../controllers";
 import { tokenVerifier } from "../middlewares";
-import { MongoClient } from "mongodb";
+// import { MongoClient } from "mongodb";
+import { connect as mongooseConnect, connection as mongooseDb } from 'mongoose';
+import { CitySchema } from "../mongooseSchemas";
 
 process.env.NODE_ENV = 'test';
 const env = process.env.NODE_ENV || 'development';
@@ -12,6 +14,10 @@ const postgresCtrl = new PostgresController(config);
 
 // Connection url mongo
 const url = 'mongodb://mongodb1:mongodb1@ds131711.mlab.com:31711/node_mentoring';
+// Connect using mongoose
+mongooseConnect(url)
+    .then(_ => console.log('Connected to MongoDB'))
+    .catch(err => console.error(`Error connecting to MongoDB: ${err}`));
 
 const express = require('express');
 const routerApi = express.Router();
@@ -57,19 +63,33 @@ routerApi.get('/users', (req, res) => {
     res.json(users);
 });
 
-routerApi.get('/city/random', (req, res) => {
 
-// Connect using MongoClient
-    MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
-        if (err) {console.error(err); }
-        const col = client.db().collection('cities');
-        // Show that duplicate records got dropped
-        col.find({}).toArray(function(err, items) {
-            const randomItem = items[Math.floor(Math.random()*items.length)];
-            res.json(randomItem);
-            client.close();
-        });
+mongooseDb.once('open', () => {
+
+    routerApi.get('/cities/random', (req, res) => {
+
+// // Connect using MongoClient
+//     MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
+//         if (err) {console.error(err); }
+//         const col = client.db().collection('cities');
+//         // Show that duplicate records got dropped
+//         col.find({}).toArray(function(err, items) {
+//             const randomItem = items[Math.floor(Math.random()*items.length)];
+//             res.json(randomItem);
+//             client.close();
+//         });
+//     });
+
+        // get random city using mongoose
+        CitySchema.find({})
+            .exec()
+            .then(cities => {
+                const randomItem = cities[Math.floor(Math.random() * cities.length)];
+                res.json(randomItem);
+            })
+            .catch(err => res.sendStatus(500).send(err));
     });
+
 });
 
 routerApi.get('/products', async (req, res) => {

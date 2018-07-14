@@ -64,11 +64,11 @@ export class PostgresController {
         this.sequelize
             .authenticate()
             .then(() => {
-                console.log('Connection has been established successfully.');
-                this.importProductData(this.path);
+                console.log('Connection to Postgres DB has been established successfully.');
+                // this.importProductData(this.path);
             })
             .catch(err => {
-                console.error('Unable to connect to the database:', err);
+                console.error('Unable to connect to the Postgres database:', err);
             });
     }
 
