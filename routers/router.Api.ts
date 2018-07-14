@@ -3,7 +3,7 @@ import { PostgresController, ProductsController, UsersController } from "../cont
 import { tokenVerifier } from "../middlewares";
 // import { MongoClient } from "mongodb";
 import { connect as mongooseConnect, connection as mongooseDb } from 'mongoose';
-import { CitySchema } from "../mongooseSchemas";
+import { CitySchema /* , UserSchema, ProductSchema */ } from "../mongooseSchemas";
 
 process.env.NODE_ENV = 'test';
 const env = process.env.NODE_ENV || 'development';
@@ -89,6 +89,22 @@ mongooseDb.once('open', () => {
             })
             .catch(err => res.sendStatus(500).send(err));
     });
+
+    // Used this route once to add data to mongoDB from json file
+    /*
+    routerApi.post('/mongodb/update-collections', (req, res) => {
+        const users = require('../bin/data/Users');
+        const products = require('../bin/data/Products');
+        UserSchema.collection.insertMany(users)
+            .then(usersResult => {
+                ProductSchema.collection.insertMany(products)
+                    .then(productsResult => {
+                        res.json([usersResult, productsResult]);
+                    })
+            })
+            .catch(err => res.send(err));
+    })
+    */
 
 });
 
