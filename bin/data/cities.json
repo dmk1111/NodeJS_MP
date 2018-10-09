@@ -1,0 +1,137 @@
+[
+  {
+    "name": "Cloverdale",
+    "country": "Iraq",
+    "capital": true,
+    "location": {
+      "lat": "-35.038016",
+      "long": "-111.904649"
+    }
+  },
+  {
+    "name": "Nelson",
+    "country": "Nepal",
+    "capital": true,
+    "location": {
+      "lat": "-70.32011",
+      "long": "161.36323"
+    }
+  },
+  {
+    "name": "Rockingham",
+    "country": "Micronesia",
+    "capital": false,
+    "location": {
+      "lat": "-34.727012",
+      "long": "156.326869"
+    }
+  },
+  {
+    "name": "Roberts",
+    "country": "French Guiana",
+    "capital": true,
+    "location": {
+      "lat": "45.223565",
+      "long": "38.092545"
+    }
+  },
+  {
+    "name": "Cecilia",
+    "country": "Sao Tome and Principe",
+    "capital": true,
+    "location": {
+      "lat": "86.429557",
+      "long": "69.666036"
+    }
+  },
+  {
+    "name": "Mahtowa",
+    "country": "Sierra Leone",
+    "capital": true,
+    "location": {
+      "lat": "58.697605",
+      "long": "12.434499"
+    }
+  },
+  {
+    "name": "Loyalhanna",
+    "country": "Moldova",
+    "capital": false,
+    "location": {
+      "lat": "69.29166",
+      "long": "-123.721095"
+    }
+  },
+  {
+    "name": "Aguila",
+    "country": "Saudi Arabia",
+    "capital": false,
+    "location": {
+      "lat": "-34.595082",
+      "long": "-61.089206"
+    }
+  },
+  {
+    "name": "Edgar",
+    "country": "Mauritius",
+    "capital": false,
+    "location": {
+      "lat": "27.689474",
+      "long": "142.559006"
+    }
+  },
+  {
+    "name": "Glenville",
+    "country": "Oman",
+    "capital": true,
+    "location": {
+      "lat": "-55.576411",
+      "long": "44.768602"
+    }
+  },
+  {
+    "name": "Zortman",
+    "country": "Namibia",
+    "capital": false,
+    "location": {
+      "lat": "-18.699212",
+      "long": "25.199145"
+    }
+  },
+  {
+    "name": "Canby",
+    "country": "Vatican City State (Holy See)",
+    "capital": false,
+    "location": {
+      "lat": "-71.793201",
+      "long": "-149.408355"
+    }
+  },
+  {
+    "name": "Osmond",
+    "country": "Dominica",
+    "capital": true,
+    "location": {
+      "lat": "-0.784041",
+      "long": "-175.927383"
+    }
+  },
+  {
+    "name": "Adelino",
+    "country": "Peru",
+    "capital": true,
+    "location": {
+      "lat": "-15.703312",
+      "long": "117.673179"
+    }
+  },
+  {
+    "name": "Harold",
+    "country": "Tuvalu",
+    "capital": true,
+    "location": {
+      "lat": "30.000902",
+      "long": "-93.599287"
+    }
+  }
+]
