@@ -47,7 +47,7 @@
     "@types/through2": "^2.0.33",
     "@types/validator": "^9.4.1",
     "@types/winston": "^2.3.9",
-    "ajv": "^6.5.1",
+    "ajv": "^6.12.3",
     "bcrypt": "^2.0.1",
     "bunyan": "^1.8.12",
     "cookies": "^0.7.1",
